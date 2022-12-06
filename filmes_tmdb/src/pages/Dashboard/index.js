@@ -6,9 +6,12 @@ import {
     Text,
     ScrollView
 } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import api from '../../services/api'
 
 export default function Dashboard() {
+
+    const navigation = useNavigation()
 
     const [filmes, setFilmes] = useState([])
 
@@ -33,7 +36,7 @@ export default function Dashboard() {
             <Text>Dashboard</Text>
             <ScrollView>
                 {filmes.map(filme => (
-                    <TouchableOpacity key={filme.id} style={styles.button}>
+                    <TouchableOpacity key={filme.id} style={styles.button} onPress={() => navigation.navigate('Detalhes')}>
                         <Text style={styles.titulos}>{filme.title}</Text>
                     </TouchableOpacity>
                 ))}
@@ -51,14 +54,15 @@ const styles = StyleSheet.create({
         backgroundColor: '#4776F0',
         fontWeight: 'bold',
         marginTop: 10,
-        height: 30,
+        height: 40,
         justifyContent: 'center',
         borderRadius: 8
     },
     titulos: {
         textAlign: 'center',
         color: '#FFFFFF',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        padding: 10
     }
 })
 
