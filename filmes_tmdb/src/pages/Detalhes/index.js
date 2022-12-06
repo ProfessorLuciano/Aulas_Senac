@@ -21,11 +21,13 @@ export default function Detalhes(ident){
         }
         loadFilme()
     }, [identifica])
-    console.log(filmes.title)
+    
 
     return(
         <View>
             <Text>Detalhes</Text>
+            <Text>{filmes.title}</Text>
+            <Text>{filmes.overview}</Text>
         </View>
     )
 }
