@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
 import {
     View,
-    Text
+    Text,
+    Image,
+    StyleSheet
 } from 'react-native'
 import api from '../../services/api'
 
@@ -26,8 +28,25 @@ export default function Detalhes(ident){
     return(
         <View>
             <Text>Detalhes</Text>
+            <Image style={styles.image}
+                    source={{ uri: `https://image.tmdb.org/t/p/original/${filmes.backdrop_path}` }} />
             <Text>{filmes.title}</Text>
             <Text>{filmes.overview}</Text>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        //marginTop:5,
+        alignItems: 'center',
+        backgroundColor: '#FFFFFF'
+    },
+    image: {
+        height: 200,
+        width: '75%',
+        resizeMode: 'stretch',
+        borderRadius: 10
+    },
+})
