@@ -33,7 +33,9 @@ export default function Dashboard() {
 
     return (
         <View style={styles.container}>
-            <Text>Dashboard</Text>
+             <TouchableOpacity style={styles.buttonFavoritos} onPress={() => navigation.navigate('Favoritos')}>
+                        <Text style={styles.titulos}>Favoritos</Text>
+                    </TouchableOpacity>
             <ScrollView>
                 {filmes.map(filme => (
                     <TouchableOpacity key={filme.id} style={styles.button} onPress={() => navigation.navigate('Detalhes', `${filme.id}`)}>
@@ -52,6 +54,14 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: '#4776F0',
+        fontWeight: 'bold',
+        marginTop: 10,
+        height: 40,
+        justifyContent: 'center',
+        borderRadius: 8
+    },
+    buttonFavoritos: {
+        backgroundColor: '#FF294E',
         fontWeight: 'bold',
         marginTop: 10,
         height: 40,
