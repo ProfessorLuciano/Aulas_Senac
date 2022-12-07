@@ -3,12 +3,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import Dashboard from '../pages/Dashboard'
 import Detalhes from '../pages/Detalhes'
+import Favoritos from '../pages/Favoritos'
 
 const Stack = createNativeStackNavigator()
 
-
-export default function Routes(){
-    
+export default function Routes(){ 
     
     return(
         <Stack.Navigator>
@@ -20,6 +19,10 @@ export default function Routes(){
             <Stack.Screen 
             name='Detalhes'
             component={Detalhes}
+            />
+            <Stack.Screen 
+            name='Favoritos'
+            component={Favoritos}
             />
 
         </Stack.Navigator>
