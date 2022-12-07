@@ -6,6 +6,7 @@ import {
     StyleSheet,
     TouchableOpacity
 } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/native'
 import api from '../../services/api'
 
@@ -27,9 +28,20 @@ export default function Detalhes(ident){
         loadFilme()
     }, [identifica])
 
-    function handleFavoritos(){
+    async function handleFavoritos(){
+
+        const favoritos = await AsyncStorage.getItem('@favorito')
+        let filmesSalvos = JSON.parse(favoritos) || []
+        const storeFilme = filmesSalvos.some(((filmeSalvo) => filmeSalvo.id === filmes.id))
        
-        
+        if(storeFilme){
+            alert('Filme já Salvo')
+            return
+        }
+
+        filmesSalvos.push(filmes)
+        AsyncStorage.setItem('@favorito', JSON.stringify(filmesSalvos))
+        alert('Filme Salvo')
         navigation.navigate('Favoritos')
     }
     
