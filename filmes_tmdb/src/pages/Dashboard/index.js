@@ -20,7 +20,7 @@ export default function Dashboard() {
         async function loadFilmes() {
             const response = await api.get('/movie/now_playing', {
                 params: {
-                    api_key: 'e3557a63a0916ff565660d0e9b496cba',
+                    api_key: '',
                     language: 'pt-BR'
                 }
             })
@@ -36,7 +36,10 @@ export default function Dashboard() {
              <TouchableOpacity style={styles.buttonFavoritos} onPress={() => navigation.navigate('Favoritos')}>
                         <Text style={styles.titulos}>Favoritos</Text>
                     </TouchableOpacity>
-            <ScrollView>
+            <ScrollView
+            showsVerticalScrollIndicator={false} 
+            overScrollMode={'always'}
+            >
                 {filmes.map(filme => (
                     <TouchableOpacity key={filme.id} style={styles.button} onPress={() => navigation.navigate('Detalhes', `${filme.id}`)}>
                         <Text style={styles.titulos}>{filme.title}</Text>

@@ -14,15 +14,18 @@ export default function Routes(){
             <Stack.Screen 
             name='Dashboard'
             component={Dashboard}
+            options={{headerShown: false}}
             />
 
             <Stack.Screen 
             name='Detalhes'
             component={Detalhes}
+            options={{headerShown: false}}
             />
             <Stack.Screen 
             name='Favoritos'
             component={Favoritos}
+            options={{headerShown: false}}
             />
 
         </Stack.Navigator>

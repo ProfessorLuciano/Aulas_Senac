@@ -4,7 +4,8 @@ import {
     Text,
     Image,
     StyleSheet,
-    TouchableOpacity
+    TouchableOpacity,
+    Linking
 } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/native'
@@ -19,7 +20,7 @@ export default function Detalhes(ident){
         async function loadFilme(){
             const response = await api.get(`/movie/${identifica}`, {
                 params: {
-                    api_key: 'e3557a63a0916ff565660d0e9b496cba',
+                    api_key: '',
                     language: 'pt-BR'
                 }
             })
@@ -29,18 +30,16 @@ export default function Detalhes(ident){
     }, [identifica])
 
     async function handleFavoritos(){
-
         const favoritos = await AsyncStorage.getItem('@favorito')
         let filmesSalvos = JSON.parse(favoritos) || []
         const storeFilme = filmesSalvos.some(((filmeSalvo) => filmeSalvo.id === filmes.id))
        
         if(storeFilme){
             alert('Filme já Salvo')
-            return
+           return
         }
-
         filmesSalvos.push(filmes)
-        AsyncStorage.setItem('@favorito', JSON.stringify(filmesSalvos))
+        await AsyncStorage.setItem('@favorito', JSON.stringify(filmesSalvos))
         alert('Filme Salvo')
         navigation.navigate('Favoritos')
     }
@@ -56,6 +55,12 @@ export default function Detalhes(ident){
             <TouchableOpacity style={styles.button} onPress={handleFavoritos}>
                 <Text style={styles.textButton}>Salvar</Text>
             </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.goBack()}>
+                <Text style={styles.textButton}>Voltar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={() => Linking.openURL(`https://m.youtube.com/results?search_query=${filmes.title} Trailer`)}>
+                    <Text style={styles.textButton}>Trailer</Text>
+                </TouchableOpacity>
         </View>
     )
 }
